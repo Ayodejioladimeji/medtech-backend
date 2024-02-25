@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-let mongoose = require("mongoose");
+let mongoose: any = require("mongoose");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 
@@ -50,3 +50,5 @@ const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log("Server running on port ", PORT);
 });
+
+// comments
