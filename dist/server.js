@@ -15,7 +15,7 @@ app.use(fileUpload({
 // routes
 // -------upload router
 app.use("/v1", require("./routes/blogRouter"));
-// app.use("/v1", require("./routes/gallery"));
+app.use("/v1", require("./routes/uploadRouter"));
 app.get("/", (req, res) => {
     res.json({ msg: "Welcome to Medtech Backend" });
 });
@@ -38,3 +38,4 @@ const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log("Server running on port ", PORT);
 });
+// comments

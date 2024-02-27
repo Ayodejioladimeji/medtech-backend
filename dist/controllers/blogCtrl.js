@@ -11,16 +11,20 @@ const Blog = require("../models/blogModel");
 const blogCtrl = {
     createBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { category, title, content } = req.body;
+            const { category, title, content, image } = req.body;
             // check for empty values
             if (category === "" || title === "" || content === "") {
                 return res.status(400).json({ msg: "Inputs cannot be empty" });
+            }
+            else if (image === "") {
+                return res.status(400).json({ msg: "Upload image to continue" });
             }
             // save data in the database
             const blog = new Blog({
                 category,
                 title,
                 content,
+                image: image.url,
             });
             yield blog.save();
             res.json({ msg: "Blog created succcessfully" });
@@ -44,7 +48,7 @@ const blogCtrl = {
     // get single blog
     getBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const blog = yield Blog.find({ _id: req.params.id });
+            const blog = yield Blog.findOne({ _id: req.params.id });
             if (!blog)
                 return res.status(400).json({ msg: "Blog does not exist" });
             res.json(blog);

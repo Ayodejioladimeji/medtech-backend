@@ -1,12 +1,14 @@
 const Blog = require("../models/blogModel");
 
 const blogCtrl = {
-  createBlog: async (req, res) => {
+  createBlog: async (req: any, res: any) => {
     try {
-      const { category, title, content } = req.body;
+      const { category, title, content, image } = req.body;
       // check for empty values
       if (category === "" || title === "" || content === "") {
         return res.status(400).json({ msg: "Inputs cannot be empty" });
+      } else if (image === "") {
+        return res.status(400).json({ msg: "Upload image to continue" });
       }
 
       // save data in the database
@@ -14,6 +16,7 @@ const blogCtrl = {
         category,
         title,
         content,
+        image: image.url,
       });
 
       await blog.save();
@@ -38,7 +41,7 @@ const blogCtrl = {
   // get single blog
   getBlog: async (req, res) => {
     try {
-      const blog = await Blog.find({ _id: req.params.id });
+      const blog = await Blog.findOne({ _id: req.params.id });
       if (!blog) return res.status(400).json({ msg: "Blog does not exist" });
 
       res.json(blog);
