@@ -53,11 +53,13 @@ const blogCtrl = {
   // update blog
   updateBlog: async (req, res) => {
     try {
-      const { id, category, title, content } = req.body;
+      const { id, category, title, content, image } = req.body;
 
       // check for empty values
       if (category === "" || title === "" || content === "") {
         return res.status(400).json({ msg: "Inputs cannot be empty" });
+      } else if (image === "") {
+        return res.status(400).json({ msg: "Upload image to continue" });
       }
 
       await Blog.findOneAndUpdate(
@@ -66,6 +68,7 @@ const blogCtrl = {
           category,
           title,
           content,
+          image: image,
         }
       );
 
