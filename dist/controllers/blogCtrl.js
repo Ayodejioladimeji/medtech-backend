@@ -84,6 +84,7 @@ const blogCtrl = {
     deleteBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
             yield Blog.findByIdAndDelete(req.params.id);
+            res.json({ msg: "Blog deleted successfully" });
         }
         catch (error) {
             return res.status(500).json({ msg: error.message });

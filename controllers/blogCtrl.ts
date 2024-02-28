@@ -82,6 +82,7 @@ const blogCtrl = {
   deleteBlog: async (req, res) => {
     try {
       await Blog.findByIdAndDelete(req.params.id);
+      res.json({ msg: "Blog deleted successfully" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
