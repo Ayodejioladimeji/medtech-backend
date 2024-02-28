@@ -24,7 +24,7 @@ const blogCtrl = {
                 category,
                 title,
                 content,
-                image: image.url,
+                image: image,
             });
             yield blog.save();
             res.json({ msg: "Blog created succcessfully" });
