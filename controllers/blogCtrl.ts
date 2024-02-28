@@ -16,7 +16,7 @@ const blogCtrl = {
         category,
         title,
         content,
-        image: image.url,
+        image: image,
       });
 
       await blog.save();
