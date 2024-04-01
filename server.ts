@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-let mongoose: any = require("mongoose");
+let mongoose = require("mongoose");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 

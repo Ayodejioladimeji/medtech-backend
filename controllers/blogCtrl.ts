@@ -1,6 +1,7 @@
 const Blog = require("../models/blogModel");
+// import Blog  from "../models/blogModel";
 
-const blogCtrl = {
+const BlogCtrl = {
   createBlog: async (req: any, res: any) => {
     try {
       const { category, title, content, image } = req.body;
@@ -29,7 +30,7 @@ const blogCtrl = {
   // get all blogs
   getAllblog: async (req, res) => {
     try {
-      const blogs = await Blog.find();
+      const blogs = await Blog.find().sort("-createdAt");;
       if (!blogs) return res.status(400).json({ msg: "Data does not exist" });
 
       res.json(blogs);
@@ -87,4 +88,4 @@ const blogCtrl = {
   //
 };
 
-module.exports = blogCtrl;
+module.exports = BlogCtrl;
