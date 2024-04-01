@@ -9,6 +9,6 @@ router.get("/blog/:id", blogCtrl?.getBlog);
 
 router.patch("/blog", blogCtrl?.updateBlog);
 
-router.delete("/blog", blogCtrl?.deleteBlog);
+router.delete("/delete-blog/:id", blogCtrl?.deleteBlog);
 
 module.exports = router;

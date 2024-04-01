@@ -24,7 +24,7 @@ const blogCtrl = {
                 category,
                 title,
                 content,
-                image: image.url,
+                image: image,
             });
             yield blog.save();
             res.json({ msg: "Blog created succcessfully" });
@@ -60,15 +60,19 @@ const blogCtrl = {
     // update blog
     updateBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id, category, title, content } = req.body;
+            const { id, category, title, content, image } = req.body;
             // check for empty values
             if (category === "" || title === "" || content === "") {
                 return res.status(400).json({ msg: "Inputs cannot be empty" });
+            }
+            else if (image === "") {
+                return res.status(400).json({ msg: "Upload image to continue" });
             }
             yield Blog.findOneAndUpdate({ _id: id }, {
                 category,
                 title,
                 content,
+                image: image,
             });
             res.json({ msg: "Blog updated successfully" });
         }
@@ -80,6 +84,7 @@ const blogCtrl = {
     deleteBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
             yield Blog.findByIdAndDelete(req.params.id);
+            res.json({ msg: "Blog deleted successfully" });
         }
         catch (error) {
             return res.status(500).json({ msg: error.message });
