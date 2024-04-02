@@ -8,12 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const Blog = require("../models/blogModel");
-const blogCtrl = {
+// import Blog  from "../models/blogModel";
+const BlogCtrl = {
     createBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { category, title, content, image } = req.body;
+            const { category, title, content, author, image } = req.body;
             // check for empty values
-            if (category === "" || title === "" || content === "") {
+            if (category === "" || title === "" || content === "" || author === "") {
                 return res.status(400).json({ msg: "Inputs cannot be empty" });
             }
             else if (image === "") {
@@ -22,6 +23,7 @@ const blogCtrl = {
             // save data in the database
             const blog = new Blog({
                 category,
+                author,
                 title,
                 content,
                 image: image,
@@ -60,9 +62,9 @@ const blogCtrl = {
     // update blog
     updateBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id, category, title, content, image } = req.body;
+            const { id, category, title, content, author, image } = req.body;
             // check for empty values
-            if (category === "" || title === "" || content === "") {
+            if (category === "" || title === "" || content === "" || author === "") {
                 return res.status(400).json({ msg: "Inputs cannot be empty" });
             }
             else if (image === "") {
@@ -70,6 +72,7 @@ const blogCtrl = {
             }
             yield Blog.findOneAndUpdate({ _id: id }, {
                 category,
+                author,
                 title,
                 content,
                 image: image,
@@ -92,4 +95,4 @@ const blogCtrl = {
     }),
     //
 };
-module.exports = blogCtrl;
+module.exports = BlogCtrl;

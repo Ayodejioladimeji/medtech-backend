@@ -4,9 +4,9 @@ const Blog = require("../models/blogModel");
 const BlogCtrl = {
   createBlog: async (req: any, res: any) => {
     try {
-      const { category, title, content, image } = req.body;
+      const { category, title, content, author, image } = req.body;
       // check for empty values
-      if (category === "" || title === "" || content === "") {
+      if (category === "" || title === "" || content === "" || author === "") {
         return res.status(400).json({ msg: "Inputs cannot be empty" });
       } else if (image === "") {
         return res.status(400).json({ msg: "Upload image to continue" });
@@ -15,6 +15,7 @@ const BlogCtrl = {
       // save data in the database
       const blog = new Blog({
         category,
+        author,
         title,
         content,
         image: image,
@@ -30,7 +31,7 @@ const BlogCtrl = {
   // get all blogs
   getAllblog: async (req, res) => {
     try {
-      const blogs = await Blog.find().sort("-createdAt");;
+      const blogs = await Blog.find()
       if (!blogs) return res.status(400).json({ msg: "Data does not exist" });
 
       res.json(blogs);
@@ -54,10 +55,10 @@ const BlogCtrl = {
   // update blog
   updateBlog: async (req, res) => {
     try {
-      const { id, category, title, content, image } = req.body;
+      const { id, category, title, content, author, image } = req.body;
 
       // check for empty values
-      if (category === "" || title === "" || content === "") {
+      if (category === "" || title === "" || content === "" || author === "") {
         return res.status(400).json({ msg: "Inputs cannot be empty" });
       } else if (image === "") {
         return res.status(400).json({ msg: "Upload image to continue" });
@@ -67,6 +68,7 @@ const BlogCtrl = {
         { _id: id },
         {
           category,
+          author,
           title,
           content,
           image: image,

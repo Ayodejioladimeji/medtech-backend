@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-let mongoose = require("mongoose");
+let Mongoose = require("mongoose");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 
@@ -30,7 +30,7 @@ app.get("/", (req: any, res: any) => {
 // connect to mongo db
 const URI = process.env.MONGO_URI;
 
-mongoose
+Mongoose
   .connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
