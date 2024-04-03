@@ -23,7 +23,7 @@ const BlogCtrl = {
 
       await blog.save();
 
-      res.json({ msg: "Blog created succcessfully" });
+      res.json({ msg: "Created succcessfully" });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
@@ -75,7 +75,7 @@ const BlogCtrl = {
         }
       );
 
-      res.json({ msg: "Blog updated successfully" });
+      res.json({ msg: "Updated successfully" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -85,7 +85,7 @@ const BlogCtrl = {
   deleteBlog: async (req, res) => {
     try {
       await Blog.findByIdAndDelete(req.params.id);
-      res.json({ msg: "Blog deleted successfully" });
+      res.json({ msg: "Deleted successfully" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
