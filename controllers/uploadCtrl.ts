@@ -7,7 +7,7 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-const uploadCtrl = {
+const UploadCtrl = {
   uploadImage: async (req, res) => {
     try {
       const file = req?.files?.files;
@@ -73,4 +73,4 @@ const removeTmp = (path) => {
   });
 };
 
-module.exports = uploadCtrl;
+module.exports = UploadCtrl;

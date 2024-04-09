@@ -7,71 +7,69 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const Blog = require("../models/blogModel");
-// import Blog from "../models/blogModel"
-const BlogCtrl = {
-    createBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
+const Media = require("../models/mediaModel");
+// 
+const MediaCtrl = {
+    createMedia: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { category, title, content, author, image } = req.body;
+            const { title, content, author, image } = req.body;
             // check for empty values
-            if (category === "" || title === "" || content === "" || author === "") {
+            if (title === "" || content === "" || author === "") {
                 return res.status(400).json({ msg: "Inputs cannot be empty" });
             }
             else if (image === "") {
                 return res.status(400).json({ msg: "Upload image to continue" });
             }
             // save data in the database
-            const blog = new Blog({
-                category,
+            const media = new Media({
                 author,
                 title,
                 content,
                 image: image,
             });
-            yield blog.save();
+            yield media.save();
             res.json({ msg: "Created succcessfully" });
         }
         catch (error) {
             res.status(500).json({ msg: error.message });
         }
     }),
-    // get all blogs
-    getAllblog: (req, res) => __awaiter(this, void 0, void 0, function* () {
+    // get all medias
+    getAllMedia: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const blogs = yield Blog.find();
-            if (!blogs)
+            const medias = yield Media.find();
+            if (!medias)
                 return res.status(400).json({ msg: "Data does not exist" });
-            res.json(blogs);
+            res.json(medias);
         }
         catch (error) {
             return res.status(500).json({ msg: error.message });
         }
     }),
-    // get single blog
-    getBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
+    // get single media
+    getMedia: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const blog = yield Blog.findOne({ _id: req.params.id });
-            if (!blog)
-                return res.status(400).json({ msg: "Blog does not exist" });
-            res.json(blog);
+            const media = yield Media.findOne({ _id: req.params.id });
+            if (!media)
+                return res.status(400).json({ msg: "Media does not exist" });
+            res.json(media);
         }
         catch (error) {
             return res.status(500).json({ msg: error.message });
         }
     }),
-    // update blog
-    updateBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
+    // update media
+    updateMedia: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id, category, title, content, author, image } = req.body;
+            const { id, title, content, author, image } = req.body;
             // check for empty values
-            if (category === "" || title === "" || content === "" || author === "") {
+            if (title === "" || content === "" || author === "") {
                 return res.status(400).json({ msg: "Inputs cannot be empty" });
             }
             else if (image === "") {
                 return res.status(400).json({ msg: "Upload image to continue" });
             }
-            yield Blog.findOneAndUpdate({ _id: id }, {
-                category,
+            yield Media.findOneAndUpdate({ _id: id }, {
                 author,
                 title,
                 content,
@@ -83,10 +81,10 @@ const BlogCtrl = {
             return res.status(500).json({ msg: error.message });
         }
     }),
-    // delete blog
-    deleteBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
+    // delete media
+    deleteMedia: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            yield Blog.findByIdAndDelete(req.params.id);
+            yield Media.findByIdAndDelete(req.params.id);
             res.json({ msg: "Deleted successfully" });
         }
         catch (error) {
@@ -95,4 +93,4 @@ const BlogCtrl = {
     }),
     //
 };
-module.exports = BlogCtrl;
+module.exports = MediaCtrl;

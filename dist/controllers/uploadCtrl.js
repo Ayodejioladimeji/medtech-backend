@@ -14,7 +14,7 @@ cloudinary.config({
     api_key: process.env.CLOUD_API_KEY,
     api_secret: process.env.CLOUD_API_SECRET,
 });
-const uploadCtrl = {
+const UploadCtrl = {
     uploadImage: (req, res) => __awaiter(this, void 0, void 0, function* () {
         var _a;
         try {
@@ -70,4 +70,4 @@ const removeTmp = (path) => {
             throw err;
     });
 };
-module.exports = uploadCtrl;
+module.exports = UploadCtrl;

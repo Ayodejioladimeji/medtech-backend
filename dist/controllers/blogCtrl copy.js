@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const Blog = require("../models/blogModel");
-// import Blog from "../models/blogModel"
+// import Blog  from "../models/blogModel";
 const BlogCtrl = {
     createBlog: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {

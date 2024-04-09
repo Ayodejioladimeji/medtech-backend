@@ -21,6 +21,7 @@ app.use(
 // routes
 // -------upload router
 app.use("/v1", require("./routes/blogRouter"));
+app.use("/v1", require("./routes/mediaRouter"));
 app.use("/v1", require("./routes/uploadRouter"));
 
 app.get("/", (req: any, res: any) => {

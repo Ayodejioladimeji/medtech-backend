@@ -1,73 +1,72 @@
-const Blog = require("../models/blogModel");
-// import Blog from "../models/blogModel"
+const Media = require("../models/mediaModel");
 
-const BlogCtrl = {
-  createBlog: async (req: any, res: any) => {
+// 
+
+const MediaCtrl = {
+  createMedia: async (req: any, res: any) => {
     try {
-      const { category, title, content, author, image } = req.body;
+      const { title, content, author, image } = req.body;
       // check for empty values
-      if (category === "" || title === "" || content === "" || author === "") {
+      if (title === "" || content === "" || author === "") {
         return res.status(400).json({ msg: "Inputs cannot be empty" });
       } else if (image === "") {
         return res.status(400).json({ msg: "Upload image to continue" });
       }
 
       // save data in the database
-      const blog = new Blog({
-        category,
+      const media = new Media({
         author,
         title,
         content,
         image: image,
       });
 
-      await blog.save();
+      await media.save();
 
       res.json({ msg: "Created succcessfully" });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
   },
-  // get all blogs
-  getAllblog: async (req, res) => {
+  // get all medias
+  getAllMedia: async (req, res) => {
     try {
-      const blogs = await Blog.find()
-      if (!blogs) return res.status(400).json({ msg: "Data does not exist" });
+      const medias = await Media.find()
+      if (!medias) return res.status(400).json({ msg: "Data does not exist" });
 
-      res.json(blogs);
+      res.json(medias);
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
 
-  // get single blog
-  getBlog: async (req, res) => {
+  // get single media
+  getMedia: async (req, res) => {
     try {
-      const blog = await Blog.findOne({ _id: req.params.id });
-      if (!blog) return res.status(400).json({ msg: "Blog does not exist" });
+      const media = await Media.findOne({ _id: req.params.id });
+      if (!media) return res.status(400).json({ msg: "Media does not exist" });
 
-      res.json(blog);
+      res.json(media);
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
 
-  // update blog
-  updateBlog: async (req, res) => {
+  // update media
+  updateMedia: async (req, res) => {
     try {
-      const { id, category, title, content, author, image } = req.body;
+      const { id, title, content, author, image } = req.body;
 
       // check for empty values
-      if (category === "" || title === "" || content === "" || author === "") {
+      if (title === "" || content === "" || author === "") {
         return res.status(400).json({ msg: "Inputs cannot be empty" });
       } else if (image === "") {
         return res.status(400).json({ msg: "Upload image to continue" });
       }
 
-      await Blog.findOneAndUpdate(
+      await Media.findOneAndUpdate(
         { _id: id },
         {
-          category,
           author,
           title,
           content,
@@ -81,10 +80,10 @@ const BlogCtrl = {
     }
   },
 
-  // delete blog
-  deleteBlog: async (req, res) => {
+  // delete media
+  deleteMedia: async (req, res) => {
     try {
-      await Blog.findByIdAndDelete(req.params.id);
+      await Media.findByIdAndDelete(req.params.id);
       res.json({ msg: "Deleted successfully" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -94,4 +93,4 @@ const BlogCtrl = {
   //
 };
 
-module.exports = BlogCtrl;
+module.exports = MediaCtrl;
