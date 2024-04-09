@@ -29,6 +29,10 @@ const mediaSchema = new mongoose_1.Schema({
         type: String,
         default: true,
     },
+    url: {
+        type: String,
+        default: true,
+    },
     image: {
         type: Object,
         required: true,

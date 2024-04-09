@@ -13,6 +13,10 @@ const mediaSchema: Schema = new Schema(
       type: String,
       default: true,
     },
+    url: {
+      type: String,
+      default: true,
+    },
     image: {
       type: Object,
       required: true,
