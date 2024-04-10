@@ -1,13 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+let mongoose = require("mongoose");
 
-interface IMedia extends Document {
-  author: string;
-  image: any;
-  title: string;
-  content: string;
-}
 
-const mediaSchema: Schema = new Schema(
+const mediaSchema = new mongoose.Schema(
   {
     author: {
       type: String,
@@ -35,6 +29,5 @@ const mediaSchema: Schema = new Schema(
   }
 );
 
-const Media = mongoose.model<IMedia>('Media', mediaSchema);
+module.exports = mongoose.model("Media", mediaSchema);
 
-export default Media;

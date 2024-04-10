@@ -12,22 +12,23 @@ const Media = require("../models/mediaModel");
 const MediaCtrl = {
     createMedia: (req, res) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { title, content, author, image } = req.body;
+            const { title, url, content, author, image } = req.body;
             // check for empty values
-            if (title === "" || content === "" || author === "") {
+            if (title === "" || url === "" || content === "" || author === "") {
                 return res.status(400).json({ msg: "Inputs cannot be empty" });
             }
             else if (image === "") {
                 return res.status(400).json({ msg: "Upload image to continue" });
             }
             // save data in the database
-            const media = new Media({
+            const medias = new Media({
                 author,
+                url,
                 title,
                 content,
                 image: image,
             });
-            yield media.save();
+            yield medias.save();
             res.json({ msg: "Created succcessfully" });
         }
         catch (error) {
